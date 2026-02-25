@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>LINK.ID Circle · Sistem Power 10 Aktif</title>
+    <!-- Font Inter & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #eef3f8;
+            color: #1b3447;
+            padding: 1.5rem;
+        }
+
+        /* MAIN APP CONTAINER */
+        .system-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2.8rem;
+            box-shadow: 0 35px 60px -20px #1b3b4e;
+            overflow: hidden;
+            padding: 2.2rem 2.2rem 2.5rem;
+            border: 1px solid rgba(45, 125, 160, 0.2);
+        }
+
+        /* header interaktif */
+        .app-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: #f8fcff;
+            padding: 1rem 2rem;
+            border-radius: 4rem;
+            border: 1px solid #cde1f0;
+        }
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(130deg, #144a62, #1f7a9e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .phygital-badge {
+            background: #1b4c66;
+            color: white;
+            border-radius: 40px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 0.6rem;
+        }
+        .member-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #e3f0fa;
+            padding: 0.3rem 1.2rem 0.3rem 0.8rem;
+            border-radius: 50px;
+        }
+        .avatar {
+            background: #286b89;
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* dashboard stats realtime */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.2rem;
+        }
+        .stat-tile {
+            background: #f1f7fd;
+            border-radius: 2rem;
+            padding: 1.2rem 1rem;
+            border: 1px solid #c8dff2;
+            box-shadow: 0 5px 12px #d6e5f0;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #2b6a8a;
+            letter-spacing: 0.3px;
+        }
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .trend-badge {
+            background: #d7ecfa;
+            border-radius: 30px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.75rem;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        /* dua kolom utama: input aksi + leaderboard */
+        .two-column {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 1.8rem 0 2rem;
+        }
+        .left-panel {
+            flex: 2;
+            min-width: 320px;
+        }
+        .right-panel {
+            flex: 1.2;
+            min-width: 280px;
+            background: #f2f9ff;
+            border-radius: 2.5rem;
+            padding: 1.5rem;
+            border: 1px solid #bdd8ef;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* card aksi */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 1rem;
+        }
+        .action-card {
+            background: white;
+            border: 1px solid #cbe0f0;
+            border-radius: 1.8rem;
+            padding: 1.2rem 1rem;
+            transition: 0.1s ease;
+            box-shadow: 0 4px 8px #dbe9f3;
+        }
+        .action-card h4 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .action-point {
+            background: #124e6b;
+            color: white;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .btn-action {
+            background: #22749e;
+            color: white;
+            border: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            width: 100%;
+            margin-top: 0.8rem;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .btn-action:hover {
+            background: #1a5c80;
+        }
+        .btn-secondary {
+            background: #cedfef;
+            color: #113448;
+        }
+
+        /* double shake simulation */
+        .pending-badge {
+            background: #ffd966;
+            color: #3a3a3a;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        .confirm-box {
+            background: #eef1f5;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+        }
+
+        /* leaderboard */
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #c4d9ed;
+            padding: 0.7rem 0;
+        }
+        .lb-name {
+            font-weight: 600;
+        }
+        .lb-points {
+            background: #194a62;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        /* wmo mini */
+        .wmo-strip {
+            background: #1b445b;
+            color: white;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* modal sim */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-card {
+            background: white;
+            max-width: 350px;
+            padding: 2rem;
+            border-radius: 2.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="system-container">
+    <!-- HEADER dinamis -->
+    <div class="app-header">
+        <div class="logo">
+            <h1><i class="fas fa-link" style="color:#1e6f96;"></i> LINK.ID Circle</h1>
+            <span style="font-size:0.8rem; background:#ebf3fa; padding:0.2rem 1rem; border-radius:30px;"><i class="fas fa-circle-nodes"></i> sistem power 10 · double shake aktif</span>
+        </div>
+        <div class="phygital-badge">
+            <i class="fas fa-handshake"></i> <span id="skorAksi">0</span> Aksi · <i class="fab fa-linkedin"></i> <span id="skorDigital">0</span> Digital
+        </div>
+        <div class="member-profile">
+            <div class="avatar">AS</div>
+            <span><strong>Andi Sanjaya</strong> <span style="color:#267c9e;">#LINK278</span></span>
+        </div>
+    </div>
+
+    <!-- STATISTIK DASHBOARD (real-time visual) -->
+    <div class="stats-grid">
+        <div class="stat-tile"><span class="stat-label">6 Bulan (rolling)</span><div class="stat-value" id="sixMonth">83</div><span class="trend-badge"><i class="fas fa-circle" style="color:#2eb872;"></i> hijau (konsisten)</span></div>
+        <div class="stat-tile"><span class="stat-label">12 Bulan tren</span><div class="stat-value" id="twelveMonth">+31%</div><span class="trend-badge"><i class="fas fa-arrow-up"></i> growth</span></div>
+        <div class="stat-tile"><span class="stat-label">Lifetime impact (Rp)</span><div class="stat-value" id="lifetimeValue">2,4M</div><span class="trend-badge">261 referral</span></div>
+        <div class="stat-tile"><span class="stat-label">Digital authority</span><div class="stat-value" id="socialProof">47</div><span class="trend-badge"><i class="fab fa-linkedin"></i> +180% views</span></div>
+    </div>
+
+    <!-- DUA PANEL: KIRI (AKSI CARD) + KANAN (LEADERBOARD DAN KONFIRMASI) -->
+    <div class="two-column">
+        <!-- LEFT PANEL: SEMUA ACTION CARD POWER 10 -->
+        <div class="left-panel">
+            <div class="section-title"><i class="fas fa-bolt" style="color:#d69e2e;"></i> Aksi Power 10 — input cepat</div>
+            <div class="action-grid">
+                <!-- Blok A (fisik) -->
+                <div class="action-card" style="border-left: 6px solid #1b7895;">
+                    <h4><i class="fas fa-check-circle"></i> HADIR <span class="action-point">10 poin</span></h4>
+                    <p style="font-size:0.8rem;">Komitmen hadir meeting</p>
+                    <button class="btn-action" onclick="submitAction('HADIR',10,'fisik')"><i class="fas fa-calendar-check"></i> Hadir sekarang</button>
+                </div>
+                <div class="action-card" style="border-left: 6px solid #1b7895;">
+                    <h4><i class="fas fa-comment-dots"></i> TEMU <span class="action-point">10 poin</span></h4>
+                    <p style="font-size:0.8rem;">4 mata dengan rekan</p>
+                    <button class="btn-action" onclick="openTemuModal()"><i class="fas fa-user-friends"></i> Input Temu</button>
+                </div>
+                <div class="action-card" style="border-left: 6px solid #1b7895;">
+                    <h4><i class="fas fa-microphone-alt"></i> ASAH <span class="action-point">10 poin</span></h4>
+                    <p>belajar modul/podcast</p>
+                    <button class="btn-action" onclick="submitAction('ASAH',10,'fisik')"><i class="fas fa-headphones"></i> Tandai asah</button>
+                </div>
+                <div class="action-card" style="border-left: 6px solid #1b7895;">
+                    <h4><i class="fas fa-gift"></i> BAGI <span class="action-point">10 poin</span></h4>
+                    <p>memberi rujukan bisnis</p>
+                    <button class="btn-action" onclick="openBagiModal()"><i class="fas fa-share"></i> Bagi referral</button>
+                </div>
+                <div class="action-card" style="border-left: 6px solid #1b7895;">
+                    <h4><i class="fas fa-user-plus"></i> AJAK <span class="action-point">10 poin</span></h4>
+                    <p>undang tamu ekosistem</p>
+                    <button class="btn-action" onclick="openAjakModal()"><i class="fas fa-door-open"></i> Input tamu</button>
+                </div>
+                <!-- Blok B LinkedIn -->
+                <div class="action-card" style="border-left: 6px solid #0f5132;">
+                    <h4><i class="fab fa-linkedin"></i> SIAR <span class="action-point">10 poin</span></h4>
+                    <p>posting edukasi minggu ini</p>
+                    <button class="btn-action btn-secondary" onclick="syncLinkedIn('SIAR')"><i class="fas fa-sync-alt"></i> Sync posting</button>
+                </div>
+                <div class="action-card" style="border-left: 6px solid #0f5132;">
+                    <h4><i class="fas fa-reply-all"></i> SAHUT <span class="action-point">10 poin</span></h4>
+                    <p>3 komentar berbobot</p>
+                    <button class="btn-action btn-secondary" onclick="syncLinkedIn('SAHUT')"><i class="fab fa-linkedin"></i> Sync komentar</button>
+                </div>
+                <div class="action-card" style="border-left: 6px solid #0f5132;">
+                    <h4><i class="fas fa-link"></i> JARING <span class="action-point">10 poin</span></h4>
+                    <p>2 koneksi strategis</p>
+                    <button class="btn-action btn-secondary" onclick="syncLinkedIn('JARING')"><i class="fas fa-user-plus"></i> Sync koneksi</button>
+                </div>
+                <div class="action-card" style="border-left: 6px solid #0f5132;">
+                    <h4><i class="fas fa-envelope"></i> SAPA <span class="action-point">10 poin</span></h4>
+                    <p>2 DM personal</p>
+                    <button class="btn-action btn-secondary" onclick="syncLinkedIn('SAPA')"><i class="fas fa-paper-plane"></i> Sync DM</button>
+                </div>
+                <div class="action-card" style="border-left: 6px solid #0f5132;">
+                    <h4><i class="fas fa-thumbs-up"></i> DORONG <span class="action-point">10 poin</span></h4>
+                    <p>rekomendasi publik</p>
+                    <button class="btn-action btn-secondary" onclick="syncLinkedIn('DORONG')"><i class="fas fa-star"></i> Sync endorse</button>
+                </div>
+            </div>
+
+            <!-- SIMULASI DOUBLE SHAKE & PENDING -->
+            <div style="background: #fcf2de; border-radius: 2rem; padding: 1rem 1.5rem; margin-top: 1.8rem;">
+                <span><i class="fas fa-shake" style="color:#b1610e;"></i> <strong>Double shake pending:</strong> aksi TEMU / BAGI butuh konfirmasi rekan</span>
+                <div id="pendingArea" style="margin-top: 0.8rem;">
+                    <!-- akan diisi javascript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: LEADERBOARD + KONFIRMASI + WMO -->
+        <div class="right-panel">
+            <h3 style="display:flex; gap:0.5rem;"><i class="fas fa-trophy" style="color:#d4a13e;"></i> Leaderboard anggota</h3>
+            <div class="leaderboard-item"><span class="lb-name"><i class="fas fa-crown" style="color:gold;"></i> Rina K.</span> <span class="lb-points">940</span></div>
+            <div class="leaderboard-item"><span class="lb-name"><i class="fas fa-user"></i> Andi S. (Anda)</span> <span class="lb-points" id="myScore">680</span></div>
+            <div class="leaderboard-item"><span class="lb-name"><i class="fas fa-user"></i> Budi H.</span> <span class="lb-points">820</span></div>
+            <div class="leaderboard-item"><span class="lb-name"><i class="fas fa-user"></i> Sari P.</span> <span class="lb-points">790</span></div>
+            <div class="leaderboard-item"><span class="lb-name"><i class="fas fa-user"></i> Dimas W.</span> <span class="lb-points">710</span></div>
+            <hr style="margin: 1rem 0; border-color:#b7d2ea;">
+            <div><i class="fas fa-clock"></i> WMO hari ini: <strong>Rabu</strong> — Hadir + Bagi</div>
+            <div style="background: #bfdcef; border-radius: 1.2rem; padding: 0.8rem; margin-top:1rem;">
+                <span class="pending-badge"><i class="fas fa-exchange-alt"></i> Konfirmasi masuk</span>
+                <div id="confirmationTasks">- Belum ada konfirmasi</div>
+            </div>
+            <button class="btn-action" style="background:#417c9c; margin-top:1.2rem;" onclick="simulateApiSync()"><i class="fab fa-linkedin"></i> Sync LinkedIn (simulasi OAuth)</button>
+        </div>
+    </div>
+
+    <!-- FOOTER SISTEM : arsitektur & RLS -->
+    <div style="display:flex; justify-content: space-between; background: #deecf7; border-radius: 3rem; padding: 0.8rem 2rem; margin-top: 2rem; font-size:0.9rem;">
+        <span><i class="fas fa-database"></i> Supabase RLS · row level security</span>
+        <span><i class="fas fa-wifi-slash"></i> offline first PWA</span>
+        <span><i class="fas fa-bolt"></i> realtime leaderboard</span>
+    </div>
+</div>
+
+<!-- MODAL TEMU (double shake) -->
+<div id="temuModal" class="modal-overlay">
+    <div class="modal-card">
+        <i class="fas fa-handshake" style="font-size:2.5rem; color:#1b7895;"></i>
+        <h3>Input TEMU (4 mata)</h3>
+        <select id="anggotaTemu" style="width:100%; padding:0.7rem; border-radius:2rem; border:1px solid #ccc; margin:1rem 0;">
+            <option value="Rina K.">Rina K.</option>
+            <option value="Budi H.">Budi H.</option>
+            <option value="Sari P.">Sari P.</option>
+            <option value="Dimas W.">Dimas W.</option>
+        </select>
+        <button class="btn-action" onclick="prosesTemu()">Kirim, butuh konfirmasi</button>
+        <button class="btn-action btn-secondary" style="margin-top:0.5rem;" onclick="closeModal('temuModal')">batal</button>
+    </div>
+</div>
+<!-- MODAL BAGI -->
+<div id="bagiModal" class="modal-overlay">
+    <div class="modal-card">
+        <i class="fas fa-gift" style="font-size:2.5rem; color:#1b7895;"></i>
+        <h3>BAGI peluang bisnis</h3>
+        <select id="penerimaBagi" style="width:100%; padding:0.7rem; border-radius:2rem;">
+            <option value="Rina K.">Rina K.</option>
+            <option value="Budi H.">Budi H.</option>
+            <option value="Sari P.">Sari P.</option>
+        </select>
+        <button class="btn-action" onclick="prosesBagi()">Kirim referral (pending)</button>
+        <button class="btn-action btn-secondary" onclick="closeModal('bagiModal')">batal</button>
+    </div>
+</div>
+<!-- MODAL AJAK (data tamu) -->
+<div id="ajakModal" class="modal-overlay">
+    <div class="modal-card" style="max-width:400px;">
+        <i class="fas fa-user-plus" style="font-size:2rem;"></i>
+        <h3>Data Tamu (AJAK)</h3>
+        <input id="namaTamu" placeholder="Nama lengkap" style="width:100%; margin:0.2rem 0; padding:0.5rem; border-radius:30px; border:1px solid #ccc;"><br>
+        <input id="waTamu" placeholder="No WhatsApp" style="width:100%; margin:0.2rem 0; padding:0.5rem; border-radius:30px;"><br>
+        <input id="linkedinTamu" placeholder="URL LinkedIn (wajib)" style="width:100%; margin:0.2rem 0; padding:0.5rem; border-radius:30px;"><br>
+        <button class="btn-action" onclick="prosesAjak()">Simpan & dapatkan 10 poin</button>
+        <button class="btn-action btn-secondary" onclick="closeModal('ajakModal')">tutup</button>
+    </div>
+</div>
+
+<script>
+    // State management sederhana (simulasi sistem)
+    let myTotalPoints = 680;       // skor awal
+    let fisikPoin = 320;           // hanya display
+    let digitalPoin = 360;
+
+    // elemen
+    const myScoreSpan = document.getElementById('myScore');
+    const skorAksiSpan = document.getElementById('skorAksi');
+    const skorDigitalSpan = document.getElementById('skorDigital');
+    const sixMonthSpan = document.getElementById('sixMonth');
+    const twelveMonthSpan = document.getElementById('twelveMonth');
+    const lifetimeSpan = document.getElementById('lifetimeValue');
+    const socialSpan = document.getElementById('socialProof');
+
+    // pending activities (double shake)
+    let pendingConfirmations = []; // { type, dari, target, poin }
+
+    function renderPending() {
+        const area = document.getElementById('pendingArea');
+        if (pendingConfirmations.length === 0) {
+            area.innerHTML = '<span class="pending-badge">Tidak ada pending</span>';
+        } else {
+            let html = '';
+            pendingConfirmations.forEach((p, idx) => {
+                html += `<div style="background:#e6d9b8; border-radius:2rem; padding:0.4rem 1rem; margin:0.3rem 0; display:flex; justify-content:space-between;">
+                    <span><i class="fas fa-clock"></i> ${p.type} ke ${p.target}</span>
+                    <button onclick="konfirmasiPending(${idx})" style="background:#1b7895; color:white; border:none; border-radius:30px; padding:0.2rem 0.9rem;">✔ konfirm</button>
+                </div>`;
+            });
+            area.innerHTML = html;
+        }
+        // update juga di panel kanan
+        const confDiv = document.getElementById('confirmationTasks');
+        if (pendingConfirmations.length === 0) confDiv.innerHTML = '- Belum ada konfirmasi';
+        else confDiv.innerHTML = pendingConfirmations.map(p => `⏳ ${p.type} dari ${p.dari || 'Anda?'}`).join('<br>');
+    }
+
+    // fungsi submit aksi umum (langsung tanpa double shake)
+    function submitAction(nama, poin, tipe) {
+        if (tipe === 'fisik') {
+            if (nama === 'HADIR' || nama === 'ASAH') {
+                myTotalPoints += poin;
+                fisikPoin += poin;
+            } else {
+                alert('Gunakan modal khusus untuk TEMU / BAGI / AJAK');
+                return;
+            }
+        } else {
+            // digital disederhanakan
+            myTotalPoints += poin;
+            digitalPoin += poin;
+        }
+        updateUI();
+        if (tipe === 'fisik' && (nama==='HADIR'||nama==='ASAH')) showToast(`+${poin} poin (${nama})`);
+        if (tipe!=='fisik') showToast(`+${poin} via LinkedIn sync simulasi`);
+        renderPending();
+    }
+
+    // MODAL CONTROLS
+    function openTemuModal() {
+        document.getElementById('temuModal').style.display = 'flex';
+    }
+    function openBagiModal() {
+        document.getElementById('bagiModal').style.display = 'flex';
+    }
+    function openAjakModal() {
+        document.getElementById('ajakModal').style.display = 'flex';
+    }
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function prosesTemu() {
+        const target = document.getElementById('anggotaTemu').value;
+        // tambah pending confirmation
+        pendingConfirmations.push({ type: 'TEMU', target: target, dari: 'Andi S.', poin: 10 });
+        closeModal('temuModal');
+        renderPending();
+        showToast(`TEMU dengan ${target} menunggu konfirmasi mereka (double shake)`);
+    }
+    function prosesBagi() {
+        const target = document.getElementById('penerimaBagi').value;
+        pendingConfirmations.push({ type: 'BAGI', target: target, dari: 'Andi S.', poin: 10 });
+        closeModal('bagiModal');
+        renderPending();
+        showToast(`BAGI referral ke ${target} — butuh konfirmasi`);
+    }
+    function prosesAjak() {
+        const nama = document.getElementById('namaTamu').value;
+        const wa = document.getElementById('waTamu').value;
+        const linkedin = document.getElementById('linkedinTamu').value;
+        if (!nama || !wa || !linkedin) {
+            alert('Nama, WA, dan URL LinkedIn wajib');
+            return;
+        }
+        // AJAK langsung dapat poin (tanpa double shake)
+        myTotalPoints += 10;
+        fisikPoin += 10;
+        updateUI();
+        closeModal('ajakModal');
+        showToast(`+10 poin AJAK tamu ${nama}`);
+        // bersihkan input
+        document.getElementById('namaTamu').value = '';
+        document.getElementById('waTamu').value = '';
+        document.getElementById('linkedinTamu').value = '';
+    }
+
+    // konfirmasi pending (double shake settle)
+    function konfirmasiPending(idx) {
+        const confirm = pendingConfirmations[idx];
+        if (confirm) {
+            myTotalPoints += confirm.poin;
+            fisikPoin += confirm.poin;
+            pendingConfirmations.splice(idx, 1);
+            updateUI();
+            renderPending();
+            showToast(`✅ Konfirmasi diterima, +${confirm.poin} poin`);
+        }
+    }
+
+    // simulasi sync LinkedIn (Blok B)
+    function syncLinkedIn(jenis) {
+        // simulasi dapat 10 poin, seolah-olah dari API
+        myTotalPoints += 10;
+        digitalPoin += 10;
+        updateUI();
+        showToast(`✅ Sync ${jenis} berhasil (10 poin via OAuth 2.0)`);
+    }
+
+    function simulateApiSync() {
+        // simulasi sync semua aktivitas linkedin
+        myTotalPoints += 20; // bonus
+        digitalPoin += 20;
+        updateUI();
+        showToast(`🔁 LinkedIn sync ditarik: 20 poin tambahan (aktivitas terdeteksi)`);
+    }
+
+    function updateUI() {
+        myScoreSpan.innerText = myTotalPoints;
+        skorAksiSpan.innerText = fisikPoin;
+        skorDigitalSpan.innerText = digitalPoin;
+
+        // update dashboard stats simulasi mengambang
+        sixMonthSpan.innerText = Math.floor(70 + fisikPoin/20);
+        twelveMonthSpan.innerText = '+' + Math.floor(20 + digitalPoin/15) + '%';
+        lifetimeSpan.innerText = (2.4 + fisikPoin/1000).toFixed(1) + 'M';
+        socialSpan.innerText = Math.floor(40 + digitalPoin/12);
+    }
+
+    function showToast(msg) {
+        alert(msg); // sederhana, bisa diganti toast modern
+    }
+
+    // init render
+    renderPending();
+    updateUI();
+
+    // global close modal jika klik di luar (sederhana)
+    window.onclick = function(e) {
+        if (e.target.classList.contains('modal-overlay')) {
+            e.target.style.display = 'none';
+        }
+    }
+</script>
+<!-- small note: semua pilar, power10, double shake, dashboard, WMO sudah representasi -->
+<div style="max-width:1400px; margin:1rem auto 0; padding-left:1rem; color:#396785; font-size:0.8rem;">
+    <i class="fas fa-shield"></i> sistem proper: 7 pilar · power 10 · double shake · validasi OAuth (simulasi) · analitik 6/12/lifetime
+</div>
+</body>
+</html>
